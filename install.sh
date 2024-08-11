@@ -171,8 +171,15 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \\
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 '
 
-# Здесь будет копирование моего конфига hyprland с гита
+# Копирование моего конфига hyprland с гита
+https://github.com/Tetto-chan/dotfiles.git
+
+# Копирование конфигурационных файлов в ~/.config
+cp -r ~/dotfiles/.config/* ~/.config/
+'
 
 EOF
+
+echo "Конфигурационные файлы успешно скопированы."
 
 echo "Скрипт завершен. Система готова к использованию."
