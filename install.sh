@@ -144,7 +144,8 @@ pacman -Syu --noconfirm \
     xdg-desktop-portal-hyprland \
     kitty \
     sddm \
-    sudo
+    sudo \
+    waybar
 
 # Включение службы Bluetooth
 systemctl enable bluetooth
