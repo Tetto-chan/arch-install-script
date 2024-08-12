@@ -31,6 +31,9 @@ mount --mkdir "${DISK}p1" /mnt/boot
 
 echo "Разделы созданы и смонтированы"
 
+# Подключение к сети 
+station wlan0 connect <имя_сети>
+
 # Установка базовых пакетов с использованием pacstrap
 pacstrap -K /mnt base base-devel linux linux-headers linux-firmware intel-ucode networkmanager realtime-privileges micro neovim ntfs-3g git
 
