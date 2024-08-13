@@ -148,7 +148,9 @@ pacman -Syu --noconfirm \
     kitty \
     sddm \
     sudo \
-    waybar
+    waybar \
+    firefox \
+    discord
 
 # Включение службы Bluetooth
 systemctl enable bluetooth
