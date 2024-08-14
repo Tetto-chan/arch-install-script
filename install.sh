@@ -144,6 +144,7 @@ pacman -Syu --noconfirm \
     hyprland \
     wl-clipboard \
     xdg-desktop-portal \
+    xdg-desktop-portal-gtk \
     xdg-desktop-portal-hyprland \
     kitty \
     sddm \
