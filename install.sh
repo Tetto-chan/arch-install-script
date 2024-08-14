@@ -150,7 +150,8 @@ pacman -Syu --noconfirm \
     sudo \
     waybar \
     firefox \
-    discord
+    discord \
+    wofi
 
 # Включение службы Bluetooth
 systemctl enable bluetooth
