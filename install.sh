@@ -169,15 +169,15 @@ cd yay
 makepkg -si --noconfirm
 
 # Установка других пакетов через yay (пример)
-yay -S some-aur-package --noconfirm
-'
+yay -S davinci-resolve --noconfirm
+
 
 # Установка vim-plug для neovim
 su - $USERNAME -c '
 # Загрузка и установка vim-plug для neovim
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \\
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-'
+
 
 # Копирование моего конфига hyprland с гита
 https://github.com/Tetto-chan/dotfiles.git
