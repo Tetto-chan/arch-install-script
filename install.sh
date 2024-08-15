@@ -173,7 +173,6 @@ yay -S davinci-resolve --noconfirm
 
 
 # Установка vim-plug для neovim
-su - $USERNAME -c '
 # Загрузка и установка vim-plug для neovim
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \\
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
