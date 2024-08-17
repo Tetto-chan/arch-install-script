@@ -10,14 +10,14 @@ wipefs --all $DISK
 parted $DISK --script mklabel gpt
 
 # Создаём EFI раздел (1гб)
-parted $DISK --script mkpart primary fat32 1MiB 1GiB
+parted $DISK --script mkpart "''" fat32 1MiB 1GiB
 parted $DISK --script set 1 esp on
 
 # Создаём Swap раздел (8гб)
-parted $DISK --script mkpart primary linux-swap 1GiB 9GiB
+parted $DISK --script mkpart "''" linux-swap 1GiB 9GiB
 
 # Создаём корневой раздел на оставшемся пространстве 
-parted $DISK --script mkpart primary ext4 9GiB 100%
+parted $DISK --script mkpart "''" ext4 9GiB 100%
 
 # Форматируем разделы 
 mkfs.fat -F32 "${DISK}p1" # EFI раздел
