@@ -97,20 +97,8 @@ EOL
 echo "Служба NetworkManager запущена, загрузчик systemd-boot установлен."
 
 # Проверка и настройка fmask и dmask в /etc/fstab
-if grep -q "fmask=" /etc/fstab; then
-    sed -i 's/fmask=[0-9]\{4\}/fmask=0077/g' /etc/fstab
-fi
-
-if grep -q "dmask=" /etc/fstab; then
-    sed -i 's/dmask=[0-9]\{4\}/dmask=0077/g' /etc/fstab
-fi
-
-if ! grep -q "fmask=" /etc/fstab; then
-    sed -i '/vfat/ s/defaults/defaults,fmask=0077/' /etc/fstab
-fi
-
-if ! grep -q "dmask=" /etc/fstab; then
-    sed -i '/vfat/ s/defaults/defaults,dmask=0077/' /etc/fstab
+if grep -q ',[fd]mask=0044' /etc/fstab; then
+  sed -i 's_\(,[fd]mask=\)0044_\10077_g' /etc/fstab
 fi
 
 echo "Установка завершена. Система готова к загрузке."
