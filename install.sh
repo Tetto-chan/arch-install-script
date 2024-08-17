@@ -171,7 +171,7 @@ cd yay
 makepkg -si --noconfirm
 
 # Установка других пакетов через yay (пример)
-yay -S davinci-resolve --noconfirm
+yay -S hyprshot --noconfirm
 
 
 # Установка vim-plug для neovim
