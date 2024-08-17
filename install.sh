@@ -153,7 +153,8 @@ pacman -Syu --noconfirm \
     firefox \
     discord \
     wofi \
-    lutris
+    lutris \
+    hyprpaper
 
 # Включение службы Bluetooth
 systemctl enable bluetooth
