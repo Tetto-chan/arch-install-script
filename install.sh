@@ -44,6 +44,8 @@ echo "Базовая установка завершена, fstab создан."
 
 # Входим в chroot окружение
 arch-chroot /mnt /bin/bash <<EOF
+echo "setting up dpi blocking bypass"
+sudo pacman -S dnscrypt-proxy
 
 # Настройка системного времени
 ln -sf /usr/share/zoneinfo/Asia/Krasnoyarsk /etc/localtime
