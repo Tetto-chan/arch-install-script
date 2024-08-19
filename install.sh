@@ -49,15 +49,15 @@ arch-chroot /mnt /bin/bash <<EOF
 echo "setting up dpi blocking bypass"
 sudo pacman -S dnscrypt-proxy dnsutils
 
-cd /opt
-git clone https://github.com/bol-van/zapret.git
-cd zapret
-./install_bin.sh
-./install_prereq.sh
-./blockcheck.sh
-./install_easy.sh
-
-echo "hiding traffic was successful"
+#cd /opt
+#git clone https://github.com/bol-va n/zapret.git
+#cd zapret
+#./install_bin.sh
+#./install_prereq.sh
+#./blockcheck.sh
+#./install_easy.sh
+#
+#echo "hiding traffic was successful"
 
 # Настройка системного времени
 ln -sf /usr/share/zoneinfo/Asia/Krasnoyarsk /etc/localtime
