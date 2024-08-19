@@ -6,6 +6,8 @@ DISK="/dev/nvme0n1"
 # Очищаем все сигнатуры файловых систем на диске
 wipefs --all $DISK
 
+echo "The drive data has been cleared, partitioning is in progress"
+
 # Создаём новую таблицу разделов GPT
 parted $DISK --script mklabel gpt
 
@@ -29,7 +31,7 @@ mkfs.ext4 "${DISK}p3" # Корневой раздел
 mount "${DISK}p3" /mnt
 mount --mkdir "${DISK}p1" /mnt/boot
 
-echo "Разделы созданы и смонтированы"
+echo "Partitions created and mounted"
 
 # Подключение к сети 
 iwctl station wlan0 connect <имя_сети>
@@ -40,12 +42,22 @@ pacstrap -K /mnt base base-devel linux linux-headers linux-firmware intel-ucode 
 # Генерация файла fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
-echo "Базовая установка завершена, fstab создан."
+echo "The basic installation is complete and fstab has been created."
 
 # Входим в chroot окружение
 arch-chroot /mnt /bin/bash <<EOF
 echo "setting up dpi blocking bypass"
-sudo pacman -S dnscrypt-proxy
+sudo pacman -S dnscrypt-proxy dnsutils
+
+cd /opt
+git clone https://github.com/bol-van/zapret.git
+cd zapret
+./install_bin.sh
+./install_prereq.sh
+./blockcheck.sh
+./install_easy.sh
+
+echo "hiding traffic was successful"
 
 # Настройка системного времени
 ln -sf /usr/share/zoneinfo/Asia/Krasnoyarsk /etc/localtime
@@ -71,7 +83,7 @@ cat <<EOT > /etc/hosts
 127.0.1.1 MerCore
 EOT
 
-echo "Системное время и локализация настроены."
+echo "System time and localization are configured."
 
 # Запуск службы NetworkManager
 systemctl enable NetworkManager.service
@@ -96,17 +108,17 @@ console-mode auto
 editor no
 EOL
 
-echo "Служба NetworkManager запущена, загрузчик systemd-boot установлен."
+echo "The NetworkManager service is running and the systemd-boot boot loader is installed."
 
 # Проверка и настройка fmask и dmask в /etc/fstab
 if grep -q ',[fd]mask=0044' /etc/fstab; then
   sed -i 's_\(,[fd]mask=\)0044_\10077_g' /etc/fstab
 fi
 
-echo "Установка завершена. Система готова к загрузке."
+echo "Installation is complete. The system is ready to boot."
 
 # Установка пароля для root
-echo "Установите пароль для пользователя root:"
+echo "Set a password for the root user:"
 passwd
 
 # Добавление нового пользователя с правами sudo
@@ -114,13 +126,13 @@ USERNAME="tetto"
 useradd -m -G wheel -s /bin/bash \$USERNAME
 
 # Установка пароля для нового пользователя
-echo "Установите пароль для пользователя \$USERNAME:"
+echo "Set the password for the user \$USERNAME:"
 passwd \$USERNAME
 
 # Настройка прав для группы wheel
 sed -i 's/^# \(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
 
-echo "Пользователь и настройки прав успешно настроены."
+echo "User and rights settings have been successfully completed."
 
 # Установка дополнительных пакетов
 pacman -Syu --noconfirm \
@@ -152,7 +164,7 @@ systemctl enable bluetooth
 # Включение службы SDDM
 systemctl enable sddm
 
-echo "Дополнительные пакеты установлены, служба Bluetooth включена."
+echo "Additional packages are installed and Bluetooth service is enabled."
 
 # Вход в нового пользователя и сборка AUR пакетов
 su - $USERNAME -c '
@@ -179,6 +191,6 @@ cp -r ~/dotfiles/.config/* ~/.config/
 
 EOF
 
-echo "Конфигурационные файлы успешно скопированы."
+echo "The configuration files were successfully copied."
 
-echo "Скрипт завершен. Система готова к использованию."
+echo "The script is complete. The system is ready for use."
