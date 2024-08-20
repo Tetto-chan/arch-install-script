@@ -132,4 +132,13 @@ passwd \$USERNAME
 # Настройка прав для группы wheel
 sed -i 's/^# \(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
 
+EOF
+
 echo "User and rights settings have been successfully completed."
+read -p "Start extended installation (DE/WM, GUI apps installation)? You can start it after reboot. (y/n)" con
+
+if [[con == y]] then
+    sh userconfig.sh
+else
+    reboot
+fi
