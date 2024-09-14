@@ -45,7 +45,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 echo "The basic installation is complete and fstab has been created."
 
 # Входим в chroot окружение
-arch-chroot /mnt /bin/bash <<EOF
+arch-chroot /mnt
 echo "setting up dpi blocking bypass"
 sudo pacman -S dnscrypt-proxy dnsutils
 
@@ -121,8 +121,6 @@ passwd \$USERNAME
 
 # Настройка прав для группы wheel
 sed -i 's/^# \(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
-
-EOF
 
 echo "User and rights settings have been successfully completed."
 read -p "Start extended installation (DE/WM, GUI apps installation)? You can start it after reboot. (y/n)" con
