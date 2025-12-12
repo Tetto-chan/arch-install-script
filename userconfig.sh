@@ -22,7 +22,7 @@ pacman -Syu --noconfirm \
     discord \
     wofi \
     lutris \
-    hyprpaper
+    swww
 
 # Включение службы Bluetooth
 systemctl enable bluetooth
